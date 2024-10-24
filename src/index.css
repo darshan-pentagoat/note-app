@@ -38,3 +38,10 @@ body {
   border-radius: 30px;
   padding: 3px 10px;
 }
+.theme_btn {
+  border: none;
+  box-shadow: 3px 3px 10px #00000050;
+  padding: 3px 10px;
+  margin-left: 10px;
+  border-radius: 30px;
+}

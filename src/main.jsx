@@ -5,11 +5,14 @@ import App from "./App.jsx";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import { NoteProvider } from "./NoteContext.jsx";
+import { ThemeProvider } from "./ThemeContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <NoteProvider>
-      <App />
-    </NoteProvider>
+    <ThemeProvider>
+      <NoteProvider>
+        <App />
+      </NoteProvider>
+    </ThemeProvider>
   </StrictMode>
 );
