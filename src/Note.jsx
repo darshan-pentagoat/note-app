@@ -4,11 +4,10 @@ import NoteCard from "./NoteCard";
 import { useNote } from "./NoteContext";
 import { useTheme } from "./ThemeContext";
 
-
 const Note = () => {
   const { notes, addNote } = useNote();
-  const [searchTerm, setSearchTerm] = useState("");
   const { appStyle, mode, theme } = useTheme();
+  const [searchTerm, setSearchTerm] = useState("");
 
   const filteredNotes = notes.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
