@@ -1,0 +1,40 @@
+body {
+  background: #fbffc6b7 !important;
+}
+.noteapp_container {
+  padding: 20px;
+}
+.add_note_btn {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  box-shadow: 3px 3px 10px #00000050;
+  padding: 5px 40px;
+  border-radius: 30px;
+}
+.note_card {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  margin: 5px;
+}
+.note_card textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+}
+.note_card input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
+.search_input {
+  border: 1px solid #000000;
+  outline-color: #e29a2d;
+  margin-right: 10px;
+  border-radius: 30px;
+  padding: 3px 10px;
+}
