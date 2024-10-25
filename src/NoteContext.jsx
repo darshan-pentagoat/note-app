@@ -5,6 +5,7 @@ export const NoteContext = createContext();
 export const NoteProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
 
+
   // const handleChange = (e) => {
   //   setNotes(e.target.value);
   // };
@@ -32,6 +33,11 @@ export const NoteProvider = ({ children }) => {
   let hours = today.getHours() % 12 || 12;
   const minutes = today.getMinutes().toString().padStart(2, "0");
   const period = today.getHours() >= 12 ? "PM" : "AM";
+
+  // const [curTime, setCurTime] = useState("");
+
+  // const curMin = () => {
+  // }
 
   const currentDate = date + "/" + month + "/" + year;
   const currentTime = hours + ":" + minutes + " " + period;
