@@ -5,6 +5,26 @@ export const NoteContext = createContext();
 export const NoteProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
 
+  // const handleChange = (e) => {
+  //   setNotes(e.target.value);
+  // };
+
+  // const handleEditChange = (e) => {
+  //   setNotes(e.target.value);
+  // };
+
+  // const toogle = (idx) => {
+  //   if (isEditing === idx) {
+  //     const updatedNote = [...notes];
+  //     updatedNote[idx] = editNote;
+  //     setNotes(updatedNote);
+  //     setIsEditing(null);
+  //   } else {
+  //     setIsEditing(idx);
+  //     setEditNote(notes[idx]);
+  //   }
+  // };
+
   const today = new Date();
   const month = today.getMonth() + 1;
   const year = today.getFullYear();
