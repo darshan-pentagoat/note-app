@@ -13,6 +13,9 @@ const Note = () => {
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const pinnedNotes = filteredNotes.filter((note) => note.pinned);
+  const unpinnedNotes = filteredNotes.filter((note) => !note.pinned);
+
   return (
     <div className="noteapp_container" style={appStyle}>
       <div className="d-flex justify-content-between">
@@ -38,16 +41,30 @@ const Note = () => {
               color: theme ? "white" : "black",
             }}
           >
-            {theme ? "Dark" : "Light "}
+            {theme ? "Dark" : "Light"}
           </button>
         </div>
       </div>
 
       <div className="container_fluid card_container">
         <div className="row">
-          {filteredNotes.map((note) => (
-            <NoteCard key={note.id} note={note} />
-          ))}
+          {pinnedNotes.length > 0 && (
+            <>
+              <h4>Pinned Notes</h4>
+              {pinnedNotes.map((note) => (
+                <NoteCard key={note.id} note={note} />
+              ))}
+            </>
+          )}
+
+          {unpinnedNotes.length > 0 && (
+            <>
+              <h4>{pinnedNotes.length >= 1 ? "Other Notes" : ""}</h4>
+              {unpinnedNotes.map((note) => (
+                <NoteCard key={note.id} note={note} />
+              ))}
+            </>
+          )}
         </div>
       </div>
     </div>

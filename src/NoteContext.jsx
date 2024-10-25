@@ -32,7 +32,7 @@ export const NoteProvider = ({ children }) => {
   let hours = today.getHours() % 12 || 12;
   const minutes = today.getMinutes().toString().padStart(2, "0");
   const period = today.getHours() >= 12 ? "PM" : "AM";
-  
+
   const currentDate = date + "/" + month + "/" + year;
   const currentTime = hours + ":" + minutes + " " + period;
 
@@ -52,6 +52,14 @@ export const NoteProvider = ({ children }) => {
     );
   };
 
+  const togglePin = (id) => {
+    setNotes(
+      notes.map((note) =>
+        note.id === id ? { ...note, pinned: !note.pinned } : note
+      )
+    );
+  };
+
   return (
     <NoteContext.Provider
       value={{
@@ -61,6 +69,7 @@ export const NoteProvider = ({ children }) => {
         updateNote,
         currentDate,
         currentTime,
+        togglePin,
       }}
     >
       {children}

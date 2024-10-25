@@ -3,7 +3,8 @@ import "./index.css";
 import { useNote } from "./NoteContext";
 
 const NoteCard = ({ note }) => {
-  const { currentDate, currentTime, deleteNote, updateNote } = useNote();
+  const { currentDate, currentTime, deleteNote, updateNote, togglePin } =
+    useNote();
 
   const [desc, setDesc] = useState(note.text);
   const [isEditing, setIsEditing] = useState(true);
@@ -16,6 +17,7 @@ const NoteCard = ({ note }) => {
     updateNote(note.id, { title: e.target.value });
   };
 
+  // edit and save
   const toggleEditMode = () => {
     if (isEditing) {
       updateNote(note.id, { text: desc });
@@ -25,13 +27,18 @@ const NoteCard = ({ note }) => {
 
   return (
     <div className="col-md-3 note_card">
-      <input
-        type="text"
-        placeholder="Note Title"
-        value={note.title}
-        onChange={handleTitleChange}
-        disabled={!isEditing}
-      />
+      <div className="d-flex justify-content-between align-items-center">
+        <input
+          type="text"
+          placeholder="Note Title"
+          value={note.title}
+          onChange={handleTitleChange}
+          disabled={!isEditing}
+        />
+        <button onClick={() => togglePin(note.id)} className="pin_btn">
+          {note.pinned ? "Unpin" : "Pin"}
+        </button>
+      </div>
 
       <textarea
         rows={5}
@@ -48,7 +55,12 @@ const NoteCard = ({ note }) => {
         </div>
 
         <div>
-          <button className="btn btn-secondary me-1" onClick={toggleEditMode}>
+          <button
+            className={
+              isEditing ? "btn btn-success me-1" : "btn btn-secondary me-1" // edit and save
+            }
+            onClick={toggleEditMode}
+          >
             {isEditing ? "Save" : "Edit"}
           </button>
           <button
