@@ -8,7 +8,7 @@ body {
   background: #000000;
   color: #ffffff;
   border: none;
-  box-shadow: 3px 3px 10px #00000050;
+  box-shadow: 3px 3px 10px #5a5a5a;
   padding: 5px 40px;
   border-radius: 30px;
 }
@@ -44,4 +44,12 @@ body {
   padding: 3px 10px;
   margin-left: 10px;
   border-radius: 30px;
+}
+input:disabled {
+  background: rgb(255, 255, 255);
+  color: #000000;
+}
+textarea:disabled {
+  background: rgb(255, 255, 255);
+  color: #000000;
 }

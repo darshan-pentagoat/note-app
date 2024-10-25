@@ -29,10 +29,12 @@ export const NoteProvider = ({ children }) => {
   const month = today.getMonth() + 1;
   const year = today.getFullYear();
   const date = today.getDate();
-  const hours = today.getHours();
-  const minutes = today.getMinutes();
+  let hours = today.getHours() % 12 || 12;
+  const minutes = today.getMinutes().toString().padStart(2, "0");
+  const period = today.getHours() >= 12 ? "PM" : "AM";
+  
   const currentDate = date + "/" + month + "/" + year;
-  const currentTime = hours + ":" + minutes;
+  const currentTime = hours + ":" + minutes + " " + period;
 
   const addNote = () => {
     const newNote = { id: Date.now(), text: "", title: "" };
