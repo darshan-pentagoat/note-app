@@ -7,8 +7,8 @@ import { useTheme } from "./ThemeContext";
 const Note = () => {
   const { notes, addNote } = useNote();
   const { appStyle, mode, theme } = useTheme();
-  const [searchTerm, setSearchTerm] = useState("");
 
+  const [searchTerm, setSearchTerm] = useState("");
   const filteredNotes = notes.filter((item) =>
     item.title.toLowerCase().includes(searchTerm.toLowerCase())
   );

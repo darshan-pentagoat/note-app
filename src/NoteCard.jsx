@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import "./index.css";
 import { useNote } from "./NoteContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
+import { faThumbtack } from "@fortawesome/free-solid-svg-icons";
 
 const NoteCard = ({ note }) => {
-  const { currentDate, currentTime, deleteNote, updateNote, togglePin } =
-    useNote();
+  const {
+    currentDate,
+    currentTime,
+    deleteNote,
+    updateNote,
+    togglePin,
+    addLabel,
+    labels,
+  } = useNote();
 
   const [desc, setDesc] = useState(note.text);
   const [isEditing, setIsEditing] = useState(true);
@@ -35,9 +45,41 @@ const NoteCard = ({ note }) => {
           onChange={handleTitleChange}
           disabled={!isEditing}
         />
-        <button onClick={() => togglePin(note.id)} className="pin_btn">
-          {note.pinned ? "Unpin" : "Pin"}
-        </button>
+        <div className="d-flex justify-content-between align-items-center">
+          <button onClick={() => togglePin(note.id)} className="pin_btn">
+            {note.pinned ? (
+              <FontAwesomeIcon
+                icon={faThumbtack}
+                style={{ color: "#000000" }}
+              />
+            ) : (
+              "Pin"
+            )}
+          </button>
+          <div class="dropdown">
+            <button
+              class="dd_button dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <FontAwesomeIcon
+                icon={faEllipsisVertical}
+                style={{ color: "#000000" }}
+              />
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <button class="dropdown-item" onClick={addLabel}>
+                  + Add Label
+                </button>
+              </li>
+              {labels.map((label) => (
+                <li key={label.id}>Abd</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </div>
 
       <textarea

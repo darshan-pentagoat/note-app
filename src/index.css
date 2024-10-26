@@ -58,3 +58,13 @@ textarea:disabled {
   border-radius: 20px;
   padding: 2px 10px;
 }
+.dropdown-toggle::after {
+  display: none !important;
+}
+.dd_button {
+  background: none;
+  color: #000000;
+  border: none;
+  font-weight: bolder;
+  font-size: 20px;
+}

@@ -5,7 +5,6 @@ export const NoteContext = createContext();
 export const NoteProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
 
-
   // const handleChange = (e) => {
   //   setNotes(e.target.value);
   // };
@@ -58,12 +57,25 @@ export const NoteProvider = ({ children }) => {
     );
   };
 
+  // const togglePin = (id) => {
+  //   setNotes(
+  //     notes.map((note) => {}
+  //     )
+  //   );
+  // };
+
   const togglePin = (id) => {
     setNotes(
       notes.map((note) =>
         note.id === id ? { ...note, pinned: !note.pinned } : note
       )
     );
+  };
+
+  const [labels, setLabels] = useState([]);
+  const addLabel = () => {
+    const newLabel = { id: Date.now() };
+    setLabels([...labels, newLabel]);
   };
 
   return (
@@ -76,6 +88,8 @@ export const NoteProvider = ({ children }) => {
         currentDate,
         currentTime,
         togglePin,
+        labels,
+        addLabel,
       }}
     >
       {children}
