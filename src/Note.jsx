@@ -3,6 +3,8 @@ import "./index.css";
 import NoteCard from "./NoteCard";
 import { useNote } from "./NoteContext";
 import { useTheme } from "./ThemeContext";
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Note = () => {
   const { notes, addNote } = useNote();
@@ -33,6 +35,7 @@ const Note = () => {
           <button className="add_note_btn" onClick={addNote}>
             Add Note +
           </button>
+
           <button
             className="theme_btn"
             onClick={mode}
@@ -41,7 +44,19 @@ const Note = () => {
               color: theme ? "white" : "black",
             }}
           >
-            {theme ? "Dark" : "Light"}
+            {theme ? (
+              <FontAwesomeIcon
+                icon={faMoon}
+                size="lg"
+                style={{ color: "#ffffff" }}
+              />
+            ) : (
+              <FontAwesomeIcon
+                icon={faSun}
+                size="lg"
+                style={{ color: "#e99700" }}
+              />
+            )}
           </button>
         </div>
       </div>

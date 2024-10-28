@@ -68,3 +68,14 @@ textarea:disabled {
   font-weight: bolder;
   font-size: 20px;
 }
+.modal_btn {
+  width: 100%;
+  padding: 2px 0px !important;
+  border-radius: 0px !important;
+}
+.modal_btn:hover {
+  background: #e6e6e6 !important;
+}
+.modal_btn:focus {
+  border: 0;
+}

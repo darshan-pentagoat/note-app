@@ -72,10 +72,16 @@ export const NoteProvider = ({ children }) => {
     );
   };
 
+  // labels
   const [labels, setLabels] = useState([]);
   const addLabel = () => {
     const newLabel = { id: Date.now() };
     setLabels([...labels, newLabel]);
+  };
+
+  const [labelInput, setLabelInput] = useState([]);
+  const handleLabelInput = (e) => {
+    setLabelInput(e.target.value);
   };
 
   return (
@@ -90,6 +96,8 @@ export const NoteProvider = ({ children }) => {
         togglePin,
         labels,
         addLabel,
+        labelInput,
+        handleLabelInput,
       }}
     >
       {children}

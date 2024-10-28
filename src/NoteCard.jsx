@@ -4,6 +4,7 @@ import { useNote } from "./NoteContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import { faThumbtack } from "@fortawesome/free-solid-svg-icons";
+import ModalBox from "./ModalBox";
 
 const NoteCard = ({ note }) => {
   const {
@@ -12,7 +13,6 @@ const NoteCard = ({ note }) => {
     deleteNote,
     updateNote,
     togglePin,
-    addLabel,
     labels,
   } = useNote();
 
@@ -56,9 +56,9 @@ const NoteCard = ({ note }) => {
               "Pin"
             )}
           </button>
-          <div class="dropdown">
+          <div className="dropdown">
             <button
-              class="dd_button dropdown-toggle"
+              className="dd_button dropdown-toggle"
               type="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
@@ -68,14 +68,19 @@ const NoteCard = ({ note }) => {
                 style={{ color: "#000000" }}
               />
             </button>
-            <ul class="dropdown-menu">
+            <ul className="dropdown-menu">
               <li>
-                <button class="dropdown-item" onClick={addLabel}>
+                <button
+                  type="button"
+                  className="btn modal_btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
                   + Add Label
                 </button>
               </li>
               {labels.map((label) => (
-                <li key={label.id}>Abd</li>
+                <li key={label.id}>new label</li>
               ))}
             </ul>
           </div>
@@ -99,8 +104,9 @@ const NoteCard = ({ note }) => {
         <div>
           <button
             className={
-              isEditing ? "btn btn-success me-1" : "btn btn-secondary me-1" // edit and save
+              isEditing ? "btn me-1" : "btn btn-secondary me-1" // edit and save
             }
+            style={{ background: isEditing ? "#e29a2d" : "#707070" }}
             onClick={toggleEditMode}
           >
             {isEditing ? "Save" : "Edit"}
@@ -113,6 +119,7 @@ const NoteCard = ({ note }) => {
           </button>
         </div>
       </div>
+      <ModalBox />
     </div>
   );
 };
