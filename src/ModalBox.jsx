@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNote } from "./NoteContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModalBox = () => {
-  const { addLabel, labelInput, handleLabelInput } = useNote();
+  const { addLabel, newLabels, handleNewLabel } = useNote();
+
+  const notify = () =>
+    toast.success("Label Added Successfully", {
+      position: "top-right",
+      theme: "colored",
+      autoClose: 1000,
+    });
 
   return (
     <div
@@ -16,7 +25,7 @@ const ModalBox = () => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="exampleModalLabel">
-              Modal title
+              Labels
             </h1>
             <button
               type="button"
@@ -29,29 +38,36 @@ const ModalBox = () => {
             <input
               type="text"
               placeholder="Add New Label"
-              value={labelInput}
-              onChange={handleLabelInput}
+              value={newLabels}
+              onChange={handleNewLabel}
               style={{ border: "1px solid #000", padding: "3px 10px" }}
             />
           </div>
           <div className="modal-footer">
-            <button
+            {/* <button
               type="button"
               className="btn btn-secondary"
               data-bs-dismiss="modal"
             >
               Close
-            </button>
+            </button> */}
             <button
               type="button"
               className="btn btn-primary"
-              onClick={addLabel}
+              // onClick={addLabel}
+              onClick={function (event) {
+                addLabel();
+                notify();
+              }}
+              // data-bs-dismiss="modal"
+              // aria-label="Close"
             >
               Add
             </button>
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

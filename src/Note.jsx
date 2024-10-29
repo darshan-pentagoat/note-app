@@ -7,7 +7,7 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Note = () => {
-  const { notes, addNote } = useNote();
+  const { notes, addNote, labels } = useNote();
   const { appStyle, mode, theme } = useTheme();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -25,6 +25,16 @@ const Note = () => {
           <span style={{ color: "#e29a2d" }}>NOTE</span> App.
         </h3>
         <div>
+          {/* <label htmlFor="labels_dd">asd</label> */}
+
+          <select name="labels_dd" id="labels_dd">
+            {labels.map((label) => (
+              <option key={label.id} value={label.text}>
+                {label.text}
+              </option>
+            ))}
+          </select>
+
           <input
             type="text"
             placeholder="Search..."

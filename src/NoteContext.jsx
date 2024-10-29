@@ -73,15 +73,43 @@ export const NoteProvider = ({ children }) => {
   };
 
   // labels
+  // const addLabel = () => {
+  //   const newLabel = { id: Date.now() };
+  //   setLabels([...labels, newLabel]);
+  // };
+
   const [labels, setLabels] = useState([]);
+
   const addLabel = () => {
-    const newLabel = { id: Date.now() };
+    const newLabel = { id: Date.now(), text: newLabels };
     setLabels([...labels, newLabel]);
+    setNewLabels("");
   };
 
-  const [labelInput, setLabelInput] = useState([]);
-  const handleLabelInput = (e) => {
-    setLabelInput(e.target.value);
+  const [newLabels, setNewLabels] = useState([]);
+  const handleNewLabel = (e) => {
+    setNewLabels(e.target.value);
+  };
+  // const [labelInput, setLabelInput] = useState([]);
+  // const handleLabelInput = (e) => {
+  //   setLabelInput(e.target.value);
+  // };
+  const updateLabel = (id, updatedData) => {
+    setLabels((prevLabels) =>
+      prevLabels.map((label) =>
+        label.id === id ? { ...label, ...updatedData } : label
+      )
+    );
+  };
+  const deleteLabel = (id) => {
+    setLabels((prevLabels) => prevLabels.filter((label) => label.id !== id));
+  };
+  const filterLabel = (id, updatedData) => {
+    setLabels(
+      labels.map((label) =>
+        label.id === id ? { ...label, ...updatedData } : label
+      )
+    );
   };
 
   return (
@@ -96,8 +124,12 @@ export const NoteProvider = ({ children }) => {
         togglePin,
         labels,
         addLabel,
-        labelInput,
-        handleLabelInput,
+        // labelInput,
+        // handleLabelInput,
+        newLabels,
+        handleNewLabel,
+        updateLabel,
+        deleteLabel,
       }}
     >
       {children}

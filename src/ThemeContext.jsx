@@ -10,7 +10,7 @@ export const ThemeProvider = ({ children }) => {
 
   const appStyle = {
     backgroundColor: theme ? "#fbffc6b7" : "#333",
-    color: theme ? "#000" : "#cecece",
+    color: theme ? "#000" : "#8a8a8a",
     minHeight: "100vh",
     padding: "20px",
   };

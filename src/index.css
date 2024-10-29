@@ -79,3 +79,19 @@ textarea:disabled {
 .modal_btn:focus {
   border: 0;
 }
+.label_on_card {
+  background: #00000020;
+  padding: 0px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  margin: 2px;
+}
+.dropdown ul {
+  padding-left: 12px;
+  padding-right: 5px;
+}
+#labels_dd {
+  padding: 3px 10px;
+  margin-right: 10px;
+  border-radius: 15px;
+}
