@@ -28,6 +28,9 @@ const Note = () => {
           {/* <label htmlFor="labels_dd">asd</label> */}
 
           <select name="labels_dd" id="labels_dd">
+            <option disabled selected>
+              Select The Label
+            </option>
             {labels.map((label) => (
               <option key={label.id} value={label.text}>
                 {label.text}

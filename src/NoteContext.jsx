@@ -29,7 +29,7 @@ export const NoteProvider = ({ children }) => {
   const month = today.getMonth() + 1;
   const year = today.getFullYear();
   const date = today.getDate();
-  let hours = today.getHours() % 12 || 12;
+  const hours = today.getHours() % 12 || 12;
   const minutes = today.getMinutes().toString().padStart(2, "0");
   const period = today.getHours() >= 12 ? "PM" : "AM";
 

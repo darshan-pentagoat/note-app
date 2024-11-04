@@ -95,3 +95,14 @@ textarea:disabled {
   margin-right: 10px;
   border-radius: 15px;
 }
+/* .note_card {
+  transition: all 2s !important;
+} */
+.label {
+  display: inline-block;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 2px 6px;
+  margin: 2px;
+  font-size: 0.9em;
+}
