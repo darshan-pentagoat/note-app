@@ -9,9 +9,8 @@ import {
   faThumbtack,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import ModalBox from "./ModalBox";
 
-const NoteCard = ({ note }) => {
+const NoteCard = ({ note, setCurrentNoteId }) => {
   const {
     currentDate,
     currentTime,
@@ -25,16 +24,17 @@ const NoteCard = ({ note }) => {
 
   const [editingLabelId, setEditingLabelId] = useState(null);
   const [editedLabelText, setEditedLabelText] = useState("");
+  // const [currentNoteId, setCurrentNoteId] = useState(null);
 
   const handleEditClick = (label) => {
     setEditingLabelId(label.id);
-    setEditedLabelText(label.text); // Set input value to current label text
+    setEditedLabelText(label.text);
   };
 
   const handleSaveClick = (labelId) => {
-    updateLabel(labelId, { text: editedLabelText }); // Call the context function to update the label
-    setEditingLabelId(null); // Reset editing state
-    setEditedLabelText(""); // Clear input text
+    updateLabel(labelId, { text: editedLabelText });
+    setEditingLabelId(null);
+    setEditedLabelText("");
   };
 
   const [desc, setDesc] = useState(note.text);
@@ -96,11 +96,12 @@ const NoteCard = ({ note }) => {
                   className="btn modal_btn"
                   data-bs-toggle="modal"
                   data-bs-target="#exampleModal"
+                  onClick={() => setCurrentNoteId(note.id)} // Set the current note ID
                 >
                   + Add Label
                 </button>
               </li>
-              {labels.map((label) => (
+              {note.labels.map((label) => (
                 <ul key={label.id}>
                   <div className="d-flex justify-content-between align-items-center">
                     {editingLabelId === label.id ? (
@@ -166,7 +167,7 @@ const NoteCard = ({ note }) => {
 
       {/* Showing label */}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {labels.map((label) => (
+        {note.labels.map((label) => (
           <span className="label_on_card" key={label.id}>
             {label.text}
           </span>
@@ -197,7 +198,6 @@ const NoteCard = ({ note }) => {
           </button>
         </div>
       </div>
-      <ModalBox />
     </div>
   );
 };

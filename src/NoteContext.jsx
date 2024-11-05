@@ -42,7 +42,7 @@ export const NoteProvider = ({ children }) => {
   const currentTime = hours + ":" + minutes + " " + period;
 
   const addNote = () => {
-    const newNote = { id: Date.now(), text: "", title: "" };
+    const newNote = { id: Date.now(), text: "", title: "", labels: [] }; // Each note has an array for labels
     setNotes([...notes, newNote]);
   };
 
@@ -80,10 +80,16 @@ export const NoteProvider = ({ children }) => {
 
   const [labels, setLabels] = useState([]);
 
-  const addLabel = () => {
-    const newLabel = { id: Date.now(), text: newLabels };
-    setLabels([...labels, newLabel]);
-    setNewLabels("");
+  const addLabel = (noteId) => {
+    const newLabel = { id: Date.now(), text: newLabels }; // Create a new label
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === noteId
+          ? { ...note, labels: [...note.labels, newLabel] } // Add label to specific note
+          : note
+      )
+    );
+    setNewLabels(""); // Clear the input field after adding
   };
 
   const [newLabels, setNewLabels] = useState([]);

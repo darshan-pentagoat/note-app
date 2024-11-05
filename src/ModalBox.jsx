@@ -3,8 +3,15 @@ import { useNote } from "./NoteContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ModalBox = () => {
+const ModalBox = ({ currentNoteId }) => {
   const { addLabel, newLabels, handleNewLabel } = useNote();
+
+  const handleAddLabel = () => {
+    if (currentNoteId && newLabels.trim()) {
+      addLabel(currentNoteId); // Use the note ID from props
+      notify();
+    }
+  };
 
   const notify = () =>
     toast.success("Label Added Successfully", {
@@ -37,6 +44,7 @@ const ModalBox = () => {
           <div className="modal-body">
             <input
               type="text"
+              className="modal_input"
               placeholder="Add New Label"
               value={newLabels}
               onChange={handleNewLabel}
@@ -56,13 +64,7 @@ const ModalBox = () => {
             <button
               type="button"
               className="btn btn-primary"
-              // onClick={addLabel}
-              onClick={function (event) {
-                addLabel();
-                notify();
-              }}
-              // data-bs-dismiss="modal"
-              // aria-label="Close"
+              onClick={handleAddLabel}
             >
               Add
             </button>
