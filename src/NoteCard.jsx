@@ -20,6 +20,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
     labels,
     updateLabel,
     deleteLabel,
+    editLabel,
   } = useNote();
 
   const [editingLabelId, setEditingLabelId] = useState(null);
@@ -32,7 +33,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
   };
 
   const handleSaveClick = (labelId) => {
-    updateLabel(labelId, { text: editedLabelText });
+    editLabel(note.id, labelId, editedLabelText);
     setEditingLabelId(null);
     setEditedLabelText("");
   };
@@ -144,7 +145,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                             icon={faTrash}
                             size="sm"
                             style={{ color: "red", cursor: "pointer" }}
-                            onClick={() => deleteLabel(label.id)}
+                            onClick={() => deleteLabel(note.id, label.id)}
                           />
                         </div>
                       </>

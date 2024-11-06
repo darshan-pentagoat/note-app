@@ -117,8 +117,46 @@ export const NoteProvider = ({ children }) => {
       )
     );
   };
-  const deleteLabel = (id) => {
-    setLabels((prevLabels) => prevLabels.filter((label) => label.id !== id));
+  // const deleteLabel = (id) => {
+  //   setLabels((prevLabels) => prevLabels.filter((label) => label.id !== id));
+  // };
+  const editLabel = (noteId, labelId, newLabelText) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === noteId
+          ? {
+              ...note,
+              labels: note.labels.map((label) =>
+                label.id === labelId ? { ...label, text: newLabelText } : label
+              ),
+            }
+          : note
+      )
+    );
+    setLabels((prevLabels) =>
+      prevLabels.map((label) =>
+        label.id === labelId ? { ...label, text: newLabelText } : label
+      )
+    );
+  };
+
+  // Delete label for a specific note
+  const deleteLabel = (noteId, labelId) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === noteId
+          ? {
+              ...note,
+              labels: note.labels.filter((label) => label.id !== labelId),
+            }
+          : note
+      )
+    );
+
+    // Remove from global labels if it’s unique
+    setLabels((prevLabels) =>
+      prevLabels.filter((label) => label.id !== labelId)
+    );
   };
 
   return (
@@ -139,6 +177,7 @@ export const NoteProvider = ({ children }) => {
         handleNewLabel,
         updateLabel,
         deleteLabel,
+        editLabel,
       }}
     >
       {children}

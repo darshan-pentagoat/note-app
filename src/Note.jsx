@@ -41,7 +41,10 @@ const Note = () => {
             id="labels_dd"
             onChange={(e) => setSelectedLabel(e.target.value)} // Update selectedLabel on change
           >
-            <option value="All">All</option> {/* "All" option */}
+            <option selected disabled>
+              Search by Label
+            </option>
+            <option value="All">All</option>
             {labels.map((label) => (
               <option key={label.id} value={label.text}>
                 {label.text}
