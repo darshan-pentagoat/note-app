@@ -7,4 +7,7 @@ Ui Design
 - Dark Mode
 ![image](https://github.com/user-attachments/assets/38ba3aca-b190-45a7-a277-73290dec3908)
 
+- Edit and delete label option
+![image](https://github.com/user-attachments/assets/e5984f39-a06c-40b6-98c2-879de175f8dd)
+
 - You can also search note by title or you can filter note by labels
