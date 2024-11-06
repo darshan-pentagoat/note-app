@@ -12,6 +12,7 @@ const ModalBox = ({ currentNoteId }) => {
       notify();
     }
   };
+  
 
   const notify = () =>
     toast.success("Label Added Successfully", {
@@ -59,7 +60,6 @@ const ModalBox = ({ currentNoteId }) => {
             >
               Close
             </button> */}
-            {/* here as i add label it is adding for every note.but i wan to add for that specific note only. plz give me proper code */}
 
             <button
               type="button"

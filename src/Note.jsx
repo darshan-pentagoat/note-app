@@ -12,10 +12,20 @@ const Note = () => {
   const { appStyle, mode, theme } = useTheme();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [currentNoteId, setCurrentNoteId] = useState(null); // State to hold the current note ID
-  const filteredNotes = notes.filter((item) =>
-    item.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [currentNoteId, setCurrentNoteId] = useState(null);
+
+  // label filter
+  const [selectedLabel, setSelectedLabel] = useState("");
+
+  const filteredNotes = notes
+    .filter((item) =>
+      item.title.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .filter((item) =>
+      selectedLabel === "All" || selectedLabel === ""
+        ? true
+        : item.labels.some((label) => label.text === selectedLabel)
+    );
 
   const sortedNotes = filteredNotes.sort((a, b) => b.pinned - a.pinned);
 
@@ -26,10 +36,12 @@ const Note = () => {
           <span style={{ color: "#e29a2d" }}>NOTE</span> App.
         </h3>
         <div>
-          <select name="labels_dd" id="labels_dd">
-            <option disabled selected>
-              Select The Label
-            </option>
+          <select
+            name="labels_dd"
+            id="labels_dd"
+            onChange={(e) => setSelectedLabel(e.target.value)} // Update selectedLabel on change
+          >
+            <option value="All">All</option> {/* "All" option */}
             {labels.map((label) => (
               <option key={label.id} value={label.text}>
                 {label.text}
@@ -81,17 +93,14 @@ const Note = () => {
                 <NoteCard
                   key={note.id}
                   note={note}
-                  setCurrentNoteId={setCurrentNoteId} // Pass function to set current note ID
+                  setCurrentNoteId={setCurrentNoteId}
                 />
               ))}
             </>
           )}
         </div>
       </div>
-      <ModalBox
-        currentNoteId={currentNoteId}
-        setCurrentNoteId={setCurrentNoteId}
-      />
+      <ModalBox currentNoteId={currentNoteId} />
     </div>
   );
 };

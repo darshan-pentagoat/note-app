@@ -81,15 +81,25 @@ export const NoteProvider = ({ children }) => {
   const [labels, setLabels] = useState([]);
 
   const addLabel = (noteId) => {
-    const newLabel = { id: Date.now(), text: newLabels }; // Create a new label
+    const newLabel = { id: Date.now(), text: newLabels };
+
+    // Update the specific note's labels
     setNotes((prevNotes) =>
       prevNotes.map((note) =>
         note.id === noteId
-          ? { ...note, labels: [...note.labels, newLabel] } // Add label to specific note
+          ? { ...note, labels: [...note.labels, newLabel] }
           : note
       )
     );
-    setNewLabels(""); // Clear the input field after adding
+
+    // Add the label to the global labels list only if it doesn't already exist
+    setLabels((prevLabels) => {
+      if (!prevLabels.some((label) => label.text === newLabels)) {
+        return [...prevLabels, newLabel];
+      }
+      return prevLabels;
+    });
+    setNewLabels("");
   };
 
   const [newLabels, setNewLabels] = useState([]);
@@ -109,13 +119,6 @@ export const NoteProvider = ({ children }) => {
   };
   const deleteLabel = (id) => {
     setLabels((prevLabels) => prevLabels.filter((label) => label.id !== id));
-  };
-  const filterLabel = (id, updatedData) => {
-    setLabels(
-      labels.map((label) =>
-        label.id === id ? { ...label, ...updatedData } : label
-      )
-    );
   };
 
   return (
