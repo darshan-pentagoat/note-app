@@ -6,10 +6,12 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsis
 import {
   faArrowUpRightFromSquare,
   faCheck,
+  faPalette,
   faPenToSquare,
   faThumbtack,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import SketchCanvas from "./SketchCanvas";
 
 const NoteCard = ({ note, setCurrentNoteId }) => {
   const {
@@ -28,6 +30,8 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
   const [editingLabelId, setEditingLabelId] = useState(null);
   const [editedLabelText, setEditedLabelText] = useState("");
   // const [currentNoteId, setCurrentNoteId] = useState(null);
+
+  const [view, setView] = useState("");
 
   const handleEditClick = (label) => {
     setEditingLabelId(label.id);
@@ -70,6 +74,14 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
           disabled={!isEditing}
         />
         <div className="d-flex justify-content-between align-items-center">
+          {/* ==== canvas btn ==== */}{" "}
+          <button className="canvas_btn" onClick={() => setView("canvass")}>
+            <FontAwesomeIcon
+              icon={faPalette}
+              size="sm"
+              style={{ color: "#070707" }}
+            />
+          </button>
           <button onClick={() => togglePin(note.id)} className="pin_btn">
             {note.pinned ? (
               <FontAwesomeIcon
@@ -104,6 +116,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                   + Add Label
                 </button>
               </li>
+
               {labels.map((label) => (
                 <ul key={label.id}>
                   <div className="d-flex justify-content-between align-items-center">
@@ -211,6 +224,8 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
           </button>
         </div>
       </div>
+
+      {view === "canvass" && <SketchCanvas isEditable={isEditing} />}
     </div>
   );
 };

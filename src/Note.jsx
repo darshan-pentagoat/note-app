@@ -14,7 +14,6 @@ const Note = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState(null);
-  const [isErasing, setIsErasing] = useState(false); // State to manage drawing/erasing mode
 
   // label filter
   const [selectedLabel, setSelectedLabel] = useState("");
@@ -30,11 +29,6 @@ const Note = () => {
     );
 
   const sortedNotes = filteredNotes.sort((a, b) => b.pinned - a.pinned);
-  const CanvaStyles = {
-    border: "0.0625rem solid #9c9c9c",
-    borderRadius: "0.25rem",
-    cursor: "crosshair",
-  };
 
   // Toggle between pen and eraser
   const toggleEraseMode = () => {
@@ -116,23 +110,6 @@ const Note = () => {
         </div>
       </div>
       <ModalBox currentNoteId={currentNoteId} />
-
-      {/* Canvas with pen and erase buttons */}
-      {/* <div className="canvas-container">
-        <div className="canvas-controls">
-          <button onClick={() => setIsErasing(false)}>Pen</button>
-          <button onClick={() => setIsErasing(true)}>Erase</button>
-        </div>
-        <ReactSketchCanvas
-          style={CanvaStyles}
-          width="50%"
-          height="300px"
-          strokeWidth={isErasing ? 10 : 4} 
-          strokeColor={isErasing ? "white" : "black"}
-          eraserWidth={isErasing ? 10 : 0} 
-          eraseMode={isErasing} 
-        />
-      </div> */}
     </div>
   );
 };

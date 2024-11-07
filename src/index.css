@@ -109,3 +109,17 @@ textarea:disabled {
 .modal_input {
   width: 100%;
 }
+.canvas_btn {
+  border: none;
+  border-radius: 30px;
+  margin-right: 10px;
+}
+.draw_btn {
+  border: 1px solid;
+  border-radius: 30px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.draw_btn:hover {
+  background: #e29a2d;
+}
