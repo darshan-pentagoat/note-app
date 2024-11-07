@@ -137,7 +137,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                             icon={faArrowUpRightFromSquare}
                             size="sm"
                             style={{
-                              color: "#bd9d00",
+                              color: "#e29a2d",
                               cursor: "pointer",
                               marginRight: "5px",
                             }}

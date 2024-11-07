@@ -9,7 +9,7 @@ import ModalBox from "./ModalBox";
 import { ReactSketchCanvas } from "react-sketch-canvas";
 
 const Note = () => {
-  const { notes, addNote, labels } = useNote();
+  const { notes, addNote, labels, storeNote } = useNote();
   const { appStyle, mode, theme } = useTheme();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -43,6 +43,7 @@ const Note = () => {
 
   return (
     <div className="noteapp_container" style={appStyle}>
+      {storeNote}
       <div className="d-flex justify-content-between">
         <h3>
           <span style={{ color: "#e29a2d" }}>NOTE</span> App.

@@ -1,9 +1,20 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const NoteContext = createContext();
 
 export const NoteProvider = ({ children }) => {
   const [notes, setNotes] = useState([]);
+
+  // ========== FOR LOCAL STORAGE ==========
+  // const [notes, setNotes] = useState(() => {
+  //   const savedNotes = localStorage.getItem("notes");
+  //   return savedNotes ? JSON.parse(savedNotes) : [];
+  // });
+
+  // useEffect(() => {
+  //   localStorage.setItem("notes", JSON.stringify(notes));
+  // }, [notes]);
+  // ========== LOCAL STORAGE END ==========
 
   // const handleChange = (e) => {
   //   setNotes(e.target.value);
@@ -150,7 +161,6 @@ export const NoteProvider = ({ children }) => {
     );
   };
 
-
   // const deleteLabel = (noteId, labelId) => {
   //   setNotes((prevNotes) =>
   //     prevNotes.map((note) =>
@@ -167,6 +177,7 @@ export const NoteProvider = ({ children }) => {
   //     prevLabels.filter((label) => label.id !== labelId)
   //   );
   // };
+
   // Delete label for a specific note
   const deleteLabel = (noteId, labelId) => {
     setNotes((prevNotes) =>
@@ -179,7 +190,6 @@ export const NoteProvider = ({ children }) => {
           : note
       )
     );
-
   };
 
   return (
