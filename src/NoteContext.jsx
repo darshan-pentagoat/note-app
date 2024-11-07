@@ -79,6 +79,16 @@ export const NoteProvider = ({ children }) => {
   // };
 
   const [labels, setLabels] = useState([]);
+  // const addLabelToCard = (label) => {
+  //   setLabels((cur) => [...cur, { ...label }]);
+  // };
+  const addLabelToCard = (noteId, label) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === noteId ? { ...note, labels: [...note.labels, label] } : note
+      )
+    );
+  };
 
   const addLabel = (noteId) => {
     const newLabel = { id: Date.now(), text: newLabels };
@@ -140,6 +150,23 @@ export const NoteProvider = ({ children }) => {
     );
   };
 
+
+  // const deleteLabel = (noteId, labelId) => {
+  //   setNotes((prevNotes) =>
+  //     prevNotes.map((note) =>
+  //       note.id === noteId
+  //         ? {
+  //             ...note,
+  //             labels: note.labels.filter((label) => label.id !== labelId),
+  //           }
+  //         : note
+  //     )
+  //   );
+
+  //   setLabels((prevLabels) =>
+  //     prevLabels.filter((label) => label.id !== labelId)
+  //   );
+  // };
   // Delete label for a specific note
   const deleteLabel = (noteId, labelId) => {
     setNotes((prevNotes) =>
@@ -153,10 +180,6 @@ export const NoteProvider = ({ children }) => {
       )
     );
 
-    // Remove from global labels if it’s unique
-    setLabels((prevLabels) =>
-      prevLabels.filter((label) => label.id !== labelId)
-    );
   };
 
   return (
@@ -178,6 +201,7 @@ export const NoteProvider = ({ children }) => {
         updateLabel,
         deleteLabel,
         editLabel,
+        addLabelToCard,
       }}
     >
       {children}

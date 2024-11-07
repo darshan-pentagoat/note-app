@@ -4,6 +4,7 @@ import { useNote } from "./NoteContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons/faEllipsisVertical";
 import {
+  faArrowUpRightFromSquare,
   faCheck,
   faPenToSquare,
   faThumbtack,
@@ -21,6 +22,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
     updateLabel,
     deleteLabel,
     editLabel,
+    addLabelToCard,
   } = useNote();
 
   const [editingLabelId, setEditingLabelId] = useState(null);
@@ -102,7 +104,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                   + Add Label
                 </button>
               </li>
-              {note.labels.map((label) => (
+              {labels.map((label) => (
                 <ul key={label.id}>
                   <div className="d-flex justify-content-between align-items-center">
                     {editingLabelId === label.id ? (
@@ -132,6 +134,16 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                         <li>{label.text}</li>
                         <div>
                           <FontAwesomeIcon
+                            icon={faArrowUpRightFromSquare}
+                            size="sm"
+                            style={{
+                              color: "#bd9d00",
+                              cursor: "pointer",
+                              marginRight: "5px",
+                            }}
+                            onClick={() => addLabelToCard(note.id, label)}
+                          />
+                          <FontAwesomeIcon
                             icon={faPenToSquare}
                             size="sm"
                             style={{
@@ -144,7 +156,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                           <FontAwesomeIcon
                             icon={faTrash}
                             size="sm"
-                            style={{ color: "red", cursor: "pointer" }}
+                            style={{ color: "#e40000", cursor: "pointer" }}
                             onClick={() => deleteLabel(note.id, label.id)}
                           />
                         </div>
