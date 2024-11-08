@@ -3,7 +3,14 @@ import "./index.css";
 import NoteCard from "./NoteCard";
 import { useNote } from "./NoteContext";
 import { useTheme } from "./ThemeContext";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUpRightFromSquare,
+  faCheck,
+  faMoon,
+  faPenToSquare,
+  faSun,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ModalBox from "./ModalBox";
 import { ReactSketchCanvas } from "react-sketch-canvas";
@@ -18,6 +25,8 @@ const Note = () => {
   // label filter
   const [selectedLabel, setSelectedLabel] = useState("");
 
+  const [editingLabelId, setEditingLabelId] = useState(null);
+
   const filteredNotes = notes
     .filter((item) =>
       item.title.toLowerCase().includes(searchTerm.toLowerCase())
@@ -31,9 +40,9 @@ const Note = () => {
   const sortedNotes = filteredNotes.sort((a, b) => b.pinned - a.pinned);
 
   // Toggle between pen and eraser
-  const toggleEraseMode = () => {
-    setIsErasing((prev) => !prev);
-  };
+  // const toggleEraseMode = () => {
+  //   setIsErasing((prev) => !prev);
+  // };
 
   return (
     <div className="noteapp_container" style={appStyle}>
@@ -43,6 +52,21 @@ const Note = () => {
           <span style={{ color: "#e29a2d" }}>NOTE</span> App.
         </h3>
         <div>
+          <div>
+            <ul className="dropdown-menu">
+              <li>
+                <button
+                  type="button"
+                  className="btn modal_btn"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  onClick={() => setCurrentNoteId(note.id)} // Set the current note ID
+                >
+                  + Add Label
+                </button>
+              </li>
+            </ul>
+          </div>
           <select
             name="labels_dd"
             id="labels_dd"

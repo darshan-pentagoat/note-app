@@ -32,6 +32,9 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
   // const [currentNoteId, setCurrentNoteId] = useState(null);
 
   const [view, setView] = useState("");
+  const toggleCanvasView = () => {
+    setView((prevView) => (prevView === "canvass" ? "" : "canvass"));
+  };
 
   const handleEditClick = (label) => {
     setEditingLabelId(label.id);
@@ -75,11 +78,11 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
         />
         <div className="d-flex justify-content-between align-items-center">
           {/* ==== canvas btn ==== */}{" "}
-          <button className="canvas_btn" onClick={() => setView("canvass")}>
+          <button className="canvas_btn" onClick={toggleCanvasView}>
             <FontAwesomeIcon
               icon={faPalette}
               size="sm"
-              style={{ color: "#070707" }}
+              style={{ color: view === "canvass" ? "#e29a2d" : "#070707" }}
             />
           </button>
           <button onClick={() => togglePin(note.id)} className="pin_btn">
@@ -202,8 +205,8 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
 
       <div className="d-flex justify-content-between align-items-center">
         <div>
-          <p className="mb-0">{currentDate}</p>
-          <p className="mb-0">{currentTime}</p>
+          <p className="mb-0">{note.time}</p>
+          <p className="mb-0">{note.date}</p>
         </div>
 
         <div>
