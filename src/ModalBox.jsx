@@ -13,7 +13,7 @@ const ModalBox = ({ currentNoteId }) => {
     }
   };
 
-  const notify = () =>
+  const notify = () => 
     toast.success("Label Added Successfully", {
       position: "top-right",
       theme: "colored",

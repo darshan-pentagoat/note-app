@@ -76,7 +76,7 @@ export const NoteProvider = ({ children }) => {
       text: "",
       title: "",
       labels: [],
-      time: getCurrentTime(), 
+      time: getCurrentTime(),
       date: getCurrentDate(),
     };
     setNotes([...notes, newNote]);
@@ -115,6 +115,7 @@ export const NoteProvider = ({ children }) => {
   // };
 
   const [labels, setLabels] = useState([]);
+
   // const addLabelToCard = (label) => {
   //   setLabels((cur) => [...cur, { ...label }]);
   // };
@@ -149,6 +150,7 @@ export const NoteProvider = ({ children }) => {
   };
 
   const [newLabels, setNewLabels] = useState([]);
+
   const handleNewLabel = (e) => {
     setNewLabels(e.target.value);
   };

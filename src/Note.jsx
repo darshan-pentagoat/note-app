@@ -12,6 +12,8 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Note = () => {
   const {
@@ -51,6 +53,13 @@ const Note = () => {
     setEditedLabelText(text);
   };
 
+  const notify = () =>
+    toast.success("Label Added Successfully", {
+      position: "top-center",
+      theme: "colored",
+      autoClose: 1000,
+    });
+
   return (
     <div className="noteapp_container" style={appStyle}>
       {storeNote}
@@ -75,6 +84,29 @@ const Note = () => {
             ))}
           </select>
 
+          {/* New Label Input and Button */}
+          <span className="add_label_div">
+            <input
+              type="text"
+              className="new_label_input"
+              placeholder="Add New Label"
+              value={newLabels}
+              onChange={handleNewLabel}
+            />
+            <button
+              className="add_label_btn"
+              onClick={() => {
+                addLabel(currentNoteId);
+                notify();
+              }}
+            >
+              {" "}
+              Add Label
+            </button>
+          </span>
+
+          {/* New Label Input and Button ends */}
+
           <input
             type="text"
             placeholder="Search..."
@@ -86,22 +118,6 @@ const Note = () => {
           <button className="add_note_btn" onClick={addNote}>
             Add Note +
           </button>
-
-          {/* New Label Input and Button */}
-          <input
-            type="text"
-            className="new_label_input"
-            placeholder="Add New Label"
-            value={newLabels}
-            onChange={handleNewLabel}
-          />
-          <button
-            className="add_label_btn"
-            onClick={() => addLabel(currentNoteId)}
-          >
-            Add Label
-          </button>
-          {/* New Label Input and Button ends */}
 
           <button
             className="theme_btn"
@@ -130,10 +146,16 @@ const Note = () => {
 
       {/* Labels Section with Edit and Delete Buttons */}
       <div className="labels_section">
-        <h4>Labels</h4>
+        <h4 style={{ textDecoration: "underline" }}>
+          {labels.length === 0 ? "" : "All Labels:"}
+        </h4>
         <ul>
           {labels.map((label) => (
-            <li key={label.id} className="label_items">
+            <li
+              style={{ listStyle: "decimal" }}
+              key={label.id}
+              className="label_items"
+            >
               {editingLabelId == label.id ? (
                 <>
                   <input
@@ -146,6 +168,7 @@ const Note = () => {
                       editLabel(label.id, editedLabelText);
                       setEditingLabelId(null);
                     }}
+                    className="save_label_btn"
                   >
                     Save
                   </button>
@@ -153,10 +176,16 @@ const Note = () => {
               ) : (
                 <>
                   <span>{label.text}</span>
-                  <button onClick={() => handleLabelEdit(label.id, label.text)}>
+                  <button
+                    className="label_edit_btn"
+                    onClick={() => handleLabelEdit(label.id, label.text)}
+                  >
                     <FontAwesomeIcon icon={faPenToSquare} />
                   </button>
-                  <button onClick={() => deleteLabel(label.id)}>
+                  <button
+                    className="label_delete_btn"
+                    onClick={() => deleteLabel(label.id)}
+                  >
                     <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </>
@@ -179,6 +208,7 @@ const Note = () => {
               ))}
             </>
           )}
+          <ToastContainer />
         </div>
       </div>
     </div>

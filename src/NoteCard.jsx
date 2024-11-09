@@ -37,16 +37,16 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
     setView((prevView) => (prevView === "canvass" ? "" : "canvass"));
   };
 
-  const handleEditClick = (label) => {
-    setEditingLabelId(label.id);
-    setEditedLabelText(label.text);
-  };
+  // const handleEditClick = (label) => {
+  //   setEditingLabelId(label.id);
+  //   setEditedLabelText(label.text);
+  // };
 
-  const handleSaveClick = (labelId) => {
-    editLabel(note.id, labelId, editedLabelText);
-    setEditingLabelId(null);
-    setEditedLabelText("");
-  };
+  // const handleSaveClick = (labelId) => {
+  //   editLabel(note.id, labelId, editedLabelText);
+  //   setEditingLabelId(null);
+  //   setEditedLabelText("");
+  // };
 
   const [desc, setDesc] = useState(note.text);
   const [isEditing, setIsEditing] = useState(true);
