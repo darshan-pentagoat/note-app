@@ -76,7 +76,7 @@ export const NoteProvider = ({ children }) => {
       text: "",
       title: "",
       labels: [],
-      time: getCurrentTime(), // Add time field
+      time: getCurrentTime(), 
       date: getCurrentDate(),
     };
     setNotes([...notes, newNote]);
@@ -166,23 +166,19 @@ export const NoteProvider = ({ children }) => {
   // const deleteLabel = (id) => {
   //   setLabels((prevLabels) => prevLabels.filter((label) => label.id !== id));
   // };
-  const editLabel = (noteId, labelId, newLabelText) => {
-    setNotes((prevNotes) =>
-      prevNotes.map((note) =>
-        note.id === noteId
-          ? {
-              ...note,
-              labels: note.labels.map((label) =>
-                label.id === labelId ? { ...label, text: newLabelText } : label
-              ),
-            }
-          : note
-      )
-    );
+  const editLabel = (labelId, newText) => {
     setLabels((prevLabels) =>
       prevLabels.map((label) =>
-        label.id === labelId ? { ...label, text: newLabelText } : label
+        label.id === labelId ? { ...label, text: newText } : label
       )
+    );
+    setNotes((prevNotes) =>
+      prevNotes.map((note) => ({
+        ...note,
+        labels: note.labels.map((label) =>
+          label.id === labelId ? { ...label, text: newText } : label
+        ),
+      }))
     );
   };
 
@@ -204,7 +200,19 @@ export const NoteProvider = ({ children }) => {
   // };
 
   // Delete label for a specific note
-  const deleteLabel = (noteId, labelId) => {
+  const deleteLabel = (labelId) => {
+    setLabels((prevLabels) =>
+      prevLabels.filter((label) => label.id !== labelId)
+    );
+    setNotes((prevNotes) =>
+      prevNotes.map((note) => ({
+        ...note,
+        labels: note.labels.filter((label) => label.id !== labelId),
+      }))
+    );
+  };
+
+  const deleteParticularLabel = (noteId, labelId) => {
     setNotes((prevNotes) =>
       prevNotes.map((note) =>
         note.id === noteId
@@ -237,6 +245,7 @@ export const NoteProvider = ({ children }) => {
         deleteLabel,
         editLabel,
         addLabelToCard,
+        deleteParticularLabel,
       }}
     >
       {children}

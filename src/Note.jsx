@@ -12,20 +12,26 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import ModalBox from "./ModalBox";
-import { ReactSketchCanvas } from "react-sketch-canvas";
 
 const Note = () => {
-  const { notes, addNote, labels, storeNote } = useNote();
+  const {
+    notes,
+    addNote,
+    labels,
+    addLabel,
+    handleNewLabel,
+    newLabels,
+    storeNote,
+    editLabel,
+    deleteLabel,
+  } = useNote();
   const { appStyle, mode, theme } = useTheme();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [currentNoteId, setCurrentNoteId] = useState(null);
-
-  // label filter
   const [selectedLabel, setSelectedLabel] = useState("");
-
-  const [editingLabelId, setEditingLabelId] = useState(null);
+  const [editingLabelId, setEditingLabelId] = useState(null); // Track the label being edited
+  const [editedLabelText, setEditedLabelText] = useState(""); // Hold edited label text
 
   const filteredNotes = notes
     .filter((item) =>
@@ -39,10 +45,11 @@ const Note = () => {
 
   const sortedNotes = filteredNotes.sort((a, b) => b.pinned - a.pinned);
 
-  // Toggle between pen and eraser
-  // const toggleEraseMode = () => {
-  //   setIsErasing((prev) => !prev);
-  // };
+  // Handle label text change while editing
+  const handleLabelEdit = (id, text) => {
+    setEditingLabelId(id);
+    setEditedLabelText(text);
+  };
 
   return (
     <div className="noteapp_container" style={appStyle}>
@@ -52,21 +59,6 @@ const Note = () => {
           <span style={{ color: "#e29a2d" }}>NOTE</span> App.
         </h3>
         <div>
-          <div>
-            <ul className="dropdown-menu">
-              <li>
-                <button
-                  type="button"
-                  className="btn modal_btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                  onClick={() => setCurrentNoteId(note.id)} // Set the current note ID
-                >
-                  + Add Label
-                </button>
-              </li>
-            </ul>
-          </div>
           <select
             name="labels_dd"
             id="labels_dd"
@@ -90,9 +82,26 @@ const Note = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
+
           <button className="add_note_btn" onClick={addNote}>
             Add Note +
           </button>
+
+          {/* New Label Input and Button */}
+          <input
+            type="text"
+            className="new_label_input"
+            placeholder="Add New Label"
+            value={newLabels}
+            onChange={handleNewLabel}
+          />
+          <button
+            className="add_label_btn"
+            onClick={() => addLabel(currentNoteId)}
+          >
+            Add Label
+          </button>
+          {/* New Label Input and Button ends */}
 
           <button
             className="theme_btn"
@@ -118,6 +127,45 @@ const Note = () => {
           </button>
         </div>
       </div>
+
+      {/* Labels Section with Edit and Delete Buttons */}
+      <div className="labels_section">
+        <h4>Labels</h4>
+        <ul>
+          {labels.map((label) => (
+            <li key={label.id} className="label_items">
+              {editingLabelId == label.id ? (
+                <>
+                  <input
+                    type="text"
+                    value={editedLabelText}
+                    onChange={(e) => setEditedLabelText(e.target.value)}
+                  />
+                  <button
+                    onClick={() => {
+                      editLabel(label.id, editedLabelText);
+                      setEditingLabelId(null);
+                    }}
+                  >
+                    Save
+                  </button>
+                </>
+              ) : (
+                <>
+                  <span>{label.text}</span>
+                  <button onClick={() => handleLabelEdit(label.id, label.text)}>
+                    <FontAwesomeIcon icon={faPenToSquare} />
+                  </button>
+                  <button onClick={() => deleteLabel(label.id)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="container_fluid card_container">
         <div className="row">
           {sortedNotes.length > 0 && (
@@ -133,7 +181,6 @@ const Note = () => {
           )}
         </div>
       </div>
-      <ModalBox currentNoteId={currentNoteId} />
     </div>
   );
 };

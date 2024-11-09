@@ -25,6 +25,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
     deleteLabel,
     editLabel,
     addLabelToCard,
+    deleteParticularLabel,
   } = useNote();
 
   const [editingLabelId, setEditingLabelId] = useState(null);
@@ -108,7 +109,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
               />
             </button>
             <ul className="dropdown-menu">
-              <li>
+              {/* <li>
                 <button
                   type="button"
                   className="btn modal_btn"
@@ -118,33 +119,34 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                 >
                   + Add Label
                 </button>
-              </li>
+              </li> */}
 
               {labels.map((label) => (
                 <ul key={label.id}>
                   <div className="d-flex justify-content-between align-items-center">
                     {editingLabelId === label.id ? (
-                      <>
-                        <input
-                          type="text"
-                          value={editedLabelText}
-                          onChange={(e) => setEditedLabelText(e.target.value)}
-                          placeholder="Edit label"
-                        />
-                        {/* <button onClick={() => handleSaveClick(label.id)}>
-                          Save
-                        </button> */}
-                        <FontAwesomeIcon
-                          icon={faCheck}
-                          size="l"
-                          style={{
-                            color: "#23d100",
-                            cursor: "pointer",
-                            margin: "5px",
-                          }}
-                          onClick={() => handleSaveClick(label.id)}
-                        />
-                      </>
+                      // <>
+                      //   <input
+                      //     type="text"
+                      //     value={editedLabelText}
+                      //     onChange={(e) => setEditedLabelText(e.target.value)}
+                      //     placeholder="Edit label"
+                      //   />
+                      //   {/* <button onClick={() => handleSaveClick(label.id)}>
+                      //     Save
+                      //   </button> */}
+                      //   <FontAwesomeIcon
+                      //     icon={faCheck}
+                      //     size="l"
+                      //     style={{
+                      //       color: "#23d100",
+                      //       cursor: "pointer",
+                      //       margin: "5px",
+                      //     }}
+                      //     onClick={() => handleSaveClick(label.id)}
+                      //   />
+                      // </>
+                      <></>
                     ) : (
                       <>
                         <li>{label.text}</li>
@@ -159,7 +161,7 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                             }}
                             onClick={() => addLabelToCard(note.id, label)}
                           />
-                          <FontAwesomeIcon
+                          {/* <FontAwesomeIcon
                             icon={faPenToSquare}
                             size="sm"
                             style={{
@@ -168,12 +170,14 @@ const NoteCard = ({ note, setCurrentNoteId }) => {
                               marginRight: "5px",
                             }}
                             onClick={() => handleEditClick(label)}
-                          />
+                          /> */}
                           <FontAwesomeIcon
                             icon={faTrash}
                             size="sm"
                             style={{ color: "#e40000", cursor: "pointer" }}
-                            onClick={() => deleteLabel(note.id, label.id)}
+                            onClick={() =>
+                              deleteParticularLabel(note.id, label.id)
+                            }
                           />
                         </div>
                       </>
